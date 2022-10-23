@@ -785,10 +785,10 @@ def check_statistics_webvision(root_dir, target_domain_dir,\
             ## 重新构建字典来保存映射
             class_id2class_name = {}
             if fast_eval == 2:
-                class_id2wdnet_id_path = "/youtu-reid/yuleiqin/code_utils/noise_web_learn/SCC_baseline/imglists/mapping_google_500.txt"
+                class_id2wdnet_id_path = "../imglists/mapping_google_500.txt"
             else:
-                class_id2wdnet_id_path = "/youtu-reid/yuleiqin/code_utils/noise_web_learn/SCC_baseline/imglists/mapping_webvision_1k.txt"
-            imgnet_info = "/youtu-reid/yuleiqin/code_utils/denoise_pipeline/modules/process_imagenet_label/imagenet_class_1k_full_index.json"
+                class_id2wdnet_id_path = "../imglists/mapping_webvision_1k.txt"
+            imgnet_info = "../imagenet_class_1k_full_index.json"
             _, _, img_by_wdnet = read_json(imgnet_info)
             with open(class_id2wdnet_id_path, "r") as f:
                 lines = f.readlines()
@@ -1075,10 +1075,7 @@ def check_statistics_webvision(root_dir, target_domain_dir,\
                 im_concat = get_concat_h_resize(im, im_pred_gt)
                 im_concat.save(os.path.join(save_img_class_i_arcface_path, save_img_name_i))
         return class_id2class_name
-    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f16-I-cos120-MoPro/stage3/ckpt_50"
-    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f8-I-cos120-MoPro/stage3/ckpt_50"
-    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f1-I-cos120-MoPro/stage3/ckpt_50"
-    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f0-I-cos120-MoPro/stage3/ckpt_50_1"
+    
     save_path_mapping = os.path.join(root_dir, "class_id2name.txt")
     if os.path.exists(save_path_mapping):
         class_id2class_name = {}
