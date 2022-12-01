@@ -1,4 +1,4 @@
-*.txt filter=lfs diff=lfs merge=lfs -text
 *.pathlist filter=lfs diff=lfs merge=lfs -text
+*.txt filter=lfs diff=lfs merge=lfs -text
 ./dataset/imgnet_webvision1k/*.txt filter=lfs diff=lfs merge=lfs -text
 *.index filter=lfs diff=lfs merge=lfs -text
