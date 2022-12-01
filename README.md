@@ -24,10 +24,13 @@ The Google500 dataset uses the randomly sampled 500 classes from the 1000 classe
 ## Real-world Testing Sets
 In experiments, we evaluate webly-supervised models on the real-world testing sets including:
 * CUB200-2011 <https://www.vision.caltech.edu/datasets/cub_200_2011/>
-    Download the dataset into ```./dataset/FGVC/aircraft```.
+  * Download the dataset into ```./dataset/FGVC/CUB_200```. 
 * FGVC-Aircraft <https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/>
+  * Download the dataset into ```./dataset/FGVC/aircraft```.
 * Stanford Cars <http://ai.stanford.edu/~jkrause/cars/car_dataset.html>
+  * Download the dataset into ```./dataset/FGVC/stanford_cars```.
 * ImageNet 1k <https://image-net.org/download.php>
+  * Download the dataset into ```./dataset/webvision1k/imagenet```.
 
 
 # Data Preparation
