@@ -18,19 +18,19 @@ export NCCL_NET_GDR_READ="1"
 export NCCL_NET_GDR_LEVEL="3"
 export NCCL_P2P_LEVEL="NVL"
 ## TRAINING CONFIG
-export root_dir=""
-export pathlist=""
-export root_dir_test_web=""
-export pathlist_test_web=""
-export root_dir_test_target=""
-export pathlist_test_target=""
-export root_dir_t=""
-export pathlist_t=""
+export root_dir="./dataset/webvision1k/tfrecord_webvision_train"
+export pathlist="./dataset/webvision1k/filelist/train_filelist_webvision_1k_usable_tf.txt"
+export root_dir_test_web="./dataset/webvision1k/tfrecord_webvision_val"
+export pathlist_test_web="./dataset/webvision1k/filelist/val_webvision_1k_usable_tf.txt"
+export root_dir_test_target="./dataset/webvision1k/tfrecord_imgnet_val"
+export pathlist_test_target="./dataset/webvision1k/filelist/val_webvision_1k_usable_tf.txt"
+export root_dir_t="./dataset/webvision1k/tfrecord_imgnet_train"
+export pathlist_t="./dataset/imgnet_webvision1k/fewshot_1_shot.txt"
 export N_CLASSES=1000
 export N_BATCHSIZE=256
 ## SAVE CONFIG
-export SAVE_DIR_ROOT=""
-export SAVE_DIR_NAME=web-g500
+export SAVE_DIR_ROOT="./results"
+export SAVE_DIR_NAME=web-webv1k
 export SAVE_DIR=${SAVE_DIR_ROOT}/${SAVE_DIR_NAME}
 if [ ! -d ${SAVE_DIR} ]; then
     mkdir -p ${SAVE_DIR}

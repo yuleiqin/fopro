@@ -18,14 +18,14 @@ export NCCL_NET_GDR_READ="1"
 export NCCL_NET_GDR_LEVEL="3"
 export NCCL_P2P_LEVEL="NVL"
 ## TRAINING CONFIG
-export root_dir=''
-export root_dir_t=''
-export pathlist_t=''
+export root_dir='./dataset/WebFG496/web-bird'
+export root_dir_t='./dataset/FGVC/CUB_200/CUB_200_2011/images'
+export pathlist_t='./dataset/FGVC/CUB_200/CUB_200_2011/fewshot_1_shot.txt'
 export N_CLASSES=200
 export N_BATCHSIZE=64
 ## SAVE CONFIG
-export SAVE_DIR_ROOT=''
-export SAVE_DIR_NAME=web-air
+export SAVE_DIR_ROOT='./results'
+export SAVE_DIR_NAME=web-bird
 export SAVE_DIR=${SAVE_DIR_ROOT}/${SAVE_DIR_NAME}
 if [ ! -d ${SAVE_DIR} ]; then
     mkdir -p ${SAVE_DIR}
@@ -37,7 +37,7 @@ if [ ! -d ${SAVE_DIR1} ]; then
 fi
 
 python3 -W ignore -u train.py --seed 0 --use_fewshot --margin 0.5 --relation_nobp --use_temperature_density \
---root_dir ${root_dir} --use_soft_label \
+--root_dir ${root_dir} --use_soft_label --no_color_transform \
 --root_dir_t ${root_dir_t} --pathlist_t ${pathlist_t} \
 --arch "bcnn" --workers 8 --epochs 200 --pretrained --frozen_encoder_epoch 5 \
 --init-proto-epoch 20 --batch-size ${N_BATCHSIZE} --relation_clean_epoch 26 \
@@ -56,7 +56,7 @@ fi
 export resume_path=${SAVE_DIR1}/checkpoint_latest.tar
 
 python3 -W ignore -u train.py --seed 0 --use_fewshot --margin 0.5 --relation_nobp --use_temperature_density \
---root_dir ${root_dir} --use_soft_label \
+--root_dir ${root_dir} --use_soft_label --no_color_transform \
 --root_dir_t ${root_dir_t} --pathlist_t ${pathlist_t} \
 --arch "bcnn" --workers 8 --epochs 20 --pretrained --frozen_encoder_epoch 0 \
 --init-proto-epoch 0 --batch-size ${N_BATCHSIZE} --relation_clean_epoch 20 \
@@ -75,7 +75,7 @@ fi
 export resume_path=${SAVE_DIR2}/checkpoint_latest.tar
 
 python3 -W ignore -u train.py --seed 0 --use_fewshot --margin 0.5 --relation_nobp --use_temperature_density \
---root_dir ${root_dir} --use_soft_label --clean_fusion \
+--root_dir ${root_dir} --use_soft_label --clean_fusion --no_color_transform \
 --root_dir_t ${root_dir_t} --pathlist_t ${pathlist_t} \
 --arch "bcnn" --workers 8 --epochs 200 --pretrained --frozen_encoder_epoch 5 \
 --init-proto-epoch 20 --batch-size ${N_BATCHSIZE} --relation_clean_epoch 26 \
@@ -85,3 +85,4 @@ python3 -W ignore -u train.py --seed 0 --use_fewshot --margin 0.5 --relation_nob
 --moco_queue 2048 --start_clean_epoch 25 --pseudo_th 0.6 --dist_th 20 --alpha 0.5 \
 --w-inst 1 --w-recn 1 --w-proto 1 --w-relation 1 --w-cls-lowdim 1 \
 --dist-url 'tcp://localhost:12224' --multiprocessing-distributed --world-size 1 --rank 0
+

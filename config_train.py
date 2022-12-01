@@ -1,6 +1,6 @@
 import argparse
 
-parser = argparse.ArgumentParser(description='PyTorch WebVision/WebFG496 Training')
+parser = argparse.ArgumentParser(description='FoPro PyTorch WebVision/WebFG496 Training')
 parser.add_argument('--root_dir', default='../dataset/',
                     help='path to dataset folder')
 parser.add_argument('--pathlist_web', default='',
@@ -28,12 +28,12 @@ parser.add_argument('--update-proto-freq', default=5, type=int,
                     help='update prototype frequency (default: 5)')
 parser.add_argument('--update-relation-freq', default=5, type=int,
                     help='update relation predictor frequency (default: 5)')
-parser.add_argument('--exp-dir', default='experiment/MoPro_V1', type=str,
+parser.add_argument('--exp-dir', default='experiment/FoPro_V1', type=str,
                     help='experiment directory')
 parser.add_argument('-a', '--arch', metavar='ARCH', default='resnet50',
 choices=['resnet50','resnet50x2','resnet50x4','vgg','alexnet','bcnn'])
-parser.add_argument('-j', '--workers', default=32, type=int,
-                    help='number of data loading workers (default: 32)')
+parser.add_argument('-j', '--workers', default=16, type=int,
+                    help='number of data loading workers (default: 16)')
 parser.add_argument('--epochs', default=90, type=int, 
                     help='number of total epochs to run')
 parser.add_argument('--start-epoch', default=0, type=int, 
@@ -68,7 +68,7 @@ parser.add_argument('--dist-url', default='tcp://224.66.41.62:23456', type=str,
 parser.add_argument('--dist-backend', default='nccl', type=str,
                     help='distributed backend')
 parser.add_argument('--seed', default=None, type=int,
-                    help='seed for initializing training. ')
+                    help='seed for initializing training.')
 parser.add_argument('--gpu', default=None, type=int,
                     help='GPU id to use.')
 parser.add_argument('--multiprocessing-distributed', action='store_true',
@@ -127,10 +127,11 @@ parser.add_argument('--relation_clean_epoch', default=20, type=int,
                     help='epoch to start noise cleaning by relation module')
 parser.add_argument('--pseudo_th', default=0.8, type=float,
                     help='threshold for pseudo labels')
-parser.add_argument('--dist_th', default=0.2, type=float,
+parser.add_argument('--dist_th', default=20, type=float,
                     help='distance threshold for keeping clean samples')
 parser.add_argument('--alpha', default=0.5, type=float,
-                    help='weight to combine model prediction and prototype prediction')
+                    help='weight to combine self prediction and prototype prediction,\
+                    refers to the 1-beta in paper Eq.10')
 parser.add_argument('--annotation', default='./pseudo_label.json',
                     help='path to pseudo-label annotation')
 parser.add_argument('--relation_nobp', action='store_true', default=False,
@@ -156,7 +157,7 @@ parser.add_argument('--w_consistency', action='store_true', default=False,
                     help='reweight samples for loss computation by \
                          consistency between original image and augmented image')
 parser.add_argument('--no_color_transform', action='store_true', default=False,
-                    help='do not perform color transform on images')
+                    help='do not perform color transform on images for web-bird')
 parser.add_argument('--drop_by_consistency', action='store_true', default=False,
                     help='default drop inconfident samples by their cosine similarity with\
                     prototype; if set drop_by_consistency as true, drop by the inter-class\
