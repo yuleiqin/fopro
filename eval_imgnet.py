@@ -32,9 +32,9 @@ from DataLoader.example_pb2 import Example
 ## model python files
 from config_train import parser
 from utils.lr_scheduler_webFG import lr_scheduler as lr_scheduler_webFG
-# from archive.model import MoPro, init_weights
+# from archive.model import FoPro, init_weights
 from train import init_prototype_fewshot
-from model import MoPro, init_weights
+from model import FoPro, init_weights
 from feat_tsne import run_and_plot_tsne
 # import DataLoader.dataloader as dataloader
 import DataLoader.webFG_dataset as webFG496
@@ -925,10 +925,10 @@ def check_statistics_webvision(root_dir, target_domain_dir,\
                 im_concat = get_concat_h_resize(im, im_pred_gt)
                 im_concat.save(os.path.join(save_img_class_i_arcface_path, save_img_name_i))
         return class_id2class_name
-    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f16-I-cos120-MoPro/stage3/ckpt_50"
-    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f8-I-cos120-MoPro/stage3/ckpt_50"
-    root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f1-I-cos120-MoPro/stage3/ckpt_50"
-    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f0-I-cos120-MoPro/stage3/ckpt_50_1"
+    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f16-I-cos120-FoPro/stage3/ckpt_50"
+    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f8-I-cos120-FoPro/stage3/ckpt_50"
+    root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f1-I-cos120-FoPro/stage3/ckpt_50"
+    # root_dir = "/youtu_pedestrian_detection/yuleiqin/proposed_ckpt/web-g500-f0-I-cos120-FoPro/stage3/ckpt_50_1"
     save_path_mapping = os.path.join(root_dir, "class_id2name.txt")
     if os.path.exists(save_path_mapping):
         class_id2class_name = {}

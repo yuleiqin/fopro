@@ -7,7 +7,6 @@ import json
 import numpy as np
 from PIL import Image, ImageFile
 from tqdm import tqdm
-
 import torch
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
@@ -17,12 +16,10 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
-from model import MoPro, init_weights
-# import DataLoader.dataloader as dataloader
+from model import FoPro, init_weights
 import DataLoader.webFG_dataset as webFG496
 import DataLoader.webvision_dataset as webvision
 from config_train import parser
-
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
@@ -31,7 +28,7 @@ def main():
     if args.gpu is not None:
         print("Use GPU: {} for training".format(args.gpu))
     print("=> creating model '{}'".format(args.arch))
-    model = MoPro(args)
+    model = FoPro(args)
     if not (args.pretrained):
         model.apply(init_weights)
     model = model.cuda(args.gpu)

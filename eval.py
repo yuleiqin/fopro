@@ -13,7 +13,6 @@ from sklearn.metrics import confusion_matrix
 from PIL import Image, ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 from tqdm import tqdm
-## pytorch library
 import torch
 import torch.nn as nn
 import torch.nn.parallel
@@ -29,14 +28,11 @@ import torch.nn.functional as F
 import struct
 import io
 from DataLoader.example_pb2 import Example
-## model python files
 from config_train import parser
 from utils.lr_scheduler_webFG import lr_scheduler as lr_scheduler_webFG
-# from archive.model import MoPro, init_weights
 from train import init_prototype_fewshot
-from model import MoPro, init_weights
+from model import FoPro, init_weights
 from feat_tsne import run_and_plot_tsne
-# import DataLoader.dataloader as dataloader
 import DataLoader.webFG_dataset as webFG496
 import DataLoader.webvision_dataset as webvision
 
@@ -128,7 +124,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
     # create model
     print("=> creating model '{}'".format(args.arch))
-    model = MoPro(args)
+    model = FoPro(args)
     if not (args.pretrained):
         model.apply(init_weights)
     if args.gpu == 0:

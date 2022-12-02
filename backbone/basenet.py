@@ -145,31 +145,23 @@ class BCNN_encoder(nn.Module):
 
 
 if __name__ == "__main__":
-    # model = AlexNet_Encoder(pretrained=False)
-    # print("alex-net out channel {}".format(model.num_out_channel))
-    # # inputs = torch.rand((2, 3, 448, 448))
-    # inputs = torch.rand((2, 3, 224, 224))
-    # outputs = model(inputs)
-    # print(outputs.size())
+    model = AlexNet_Encoder(pretrained=False)
+    print("alex-net out channel {}".format(model.num_out_channel))
+    # inputs = torch.rand((2, 3, 448, 448))
+    inputs = torch.rand((2, 3, 224, 224))
+    outputs = model(inputs)
+    print(outputs.size())
 
-    # model = VGG_Encoder(pretrained=False)
-    # print("vgg out channel {}".format(model.num_out_channel))
-    # # inputs = torch.rand((2, 3, 448, 448))
-    # inputs = torch.rand((2, 3, 224, 224))
-    # outputs = model(inputs)
-    # print(outputs.size())
+    model = VGG_Encoder(pretrained=False)
+    print("vgg out channel {}".format(model.num_out_channel))
+    # inputs = torch.rand((2, 3, 448, 448))
+    inputs = torch.rand((2, 3, 224, 224))
+    outputs = model(inputs)
+    print(outputs.size())
 
     model = BCNN_encoder(pretrained=True, num_out_channel=2048)
     print("bcnn out channel {}".format(model.num_out_channel))
     # inputs = torch.rand((2, 3, 448, 448))
-    # inputs = torch.rand((2, 3, 224, 224))
-    # outputs = model(inputs)
-    # print(outputs.size())
-    print(model["features.0.weight"])
-
-# alex-net out channel 4096
-# torch.Size([2, 4096])
-# vgg out channel 4096
-# torch.Size([2, 4096])
-# bcnn out channel 2048
-# torch.Size([2, 2048])
+    inputs = torch.rand((2, 3, 224, 224))
+    outputs = model(inputs)
+    print(outputs.size())

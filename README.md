@@ -1,5 +1,4 @@
-## FoPro: Few-Shot Guided Robust Webly-Supervised Prototypical Learning
-## AAAI Submission Paper ID 3370
+# FoPro: Few-Shot Guided Robust Webly-Supervised Prototypical Learning
 
 # Abstract
 Recently, webly supervised learning (WSL) has been studied to leverage numerous and accessible data from the Internet. Most existing methods focus on learning noise-robust models from web images while neglecting the performance drop caused by the differences between web domain and real-world domain. However, only by tackling the performance gap above can we fully exploit the practical value of web datasets. To this end, we propose a Few-shot guided Prototypical (FoPro) representation learning method, which only needs a few labeled examples from reality and can significantly improve the performance in the real-world domain. Specifically, we initialize each class center with few-shot real-world data as the "realistic" prototype. Then, the intra-class distance between web instances and "realistic" prototypes is narrowed by contrastive learning. Finally, we measure image-prototype distance with a learnable metric. Prototypes are polished by adjacent high-quality web images and involved in removing distant out-of-distribution samples. In experiments, FoPro is trained on web datasets with a few real-world examples guided and evaluated on real-world datasets. Our method achieves the state-of-the-art performance on three fine-grained datasets and two large-scale datasets. Compared with existing WSL methods under the same few-shot settings, FoPro still excels in real-world generalization.
@@ -79,11 +78,16 @@ For example,
 * use the script ```./shells/webvision1k.sh``` for the training of ResNet models on WebVision1k.
 
 # Evaluation
+
+## Demo
 All the scripts can be found in ```./eval_shells```.
 
 For example,
 * use the script ```./eval_shells/web-aircraft.sh``` for the evaluation of BCNN models on FGVC-Aircraft.
 * use the script ```./eval_shells/webvision1k.sh``` for the evaluation of ResNet50 models on ImageNet1k.
+
+## Model Weights
+
 
 # Post-Processing
 Enlightened by MoPro <https://openreview.net/forum?id=0-EYBhgw80y>, noise cleaning on the WebVision1k dataset can be performed to further reduce the noise and improve performance by fine-tuning.
@@ -105,7 +109,7 @@ We would like to thank authors of SCC <https://arxiv.org/abs/2008.11894> for the
 
 
 # Citation
-If you find this useful in your research, please consider citation of our work:
+If you find this useful in your research, please consider citation of our work <https://arxiv.org/abs/2212.00465>:
 ```
 @article{FoPro,
 	title={FoPro: Few-Shot Guided Robust Webly-Supervised Prototypical Learning},

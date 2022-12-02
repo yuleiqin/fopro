@@ -6,7 +6,6 @@ import matplotlib
 from tqdm import tqdm
 
 
-
 MOUSE_10X_COLORS = {
     0: "#00846F",
     1: "#1CE6FF",

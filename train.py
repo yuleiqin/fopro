@@ -7,7 +7,6 @@ import shutil
 import time
 import warnings
 import numpy as np
-## pytorch library
 import torch
 import torch.nn as nn
 import torch.nn.parallel
@@ -21,11 +20,9 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torch.nn.functional as F
 from tqdm import tqdm
-## model python files
 from config_train import parser
 from utils.lr_scheduler_webFG import lr_scheduler as lr_scheduler_webFG
-from model import MoPro, init_weights
-# import DataLoader.dataloader as dataloader
+from model import FoPro, init_weights
 import DataLoader.webFG_dataset as webFG496
 import DataLoader.webvision_dataset as webvision
 from utils.weight_class import extract_class_weight
@@ -147,7 +144,7 @@ def main_worker(gpu, ngpus_per_node, args):
                                 world_size=args.world_size, rank=args.rank)
     ## create model
     print("=> creating model '{}'".format(args.arch))
-    model = MoPro(args)
+    model = FoPro(args)
     if not args.pretrained:
         ## 如果不使用预训练参数则需要随机初始化
         model.apply(init_weights)

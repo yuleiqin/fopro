@@ -39,10 +39,10 @@ def JSD(p, q, reduction="batchmean"):
         F.kl_div(log_mean_output, q, reduction=reduction))
 
 
-class MoPro(nn.Module):
+class FoPro(nn.Module):
 
     def __init__(self, args):
-        super(MoPro, self).__init__()
+        super(FoPro, self).__init__()
         ##=========================================================================##
         ## 设置特征抽取器
         ##=========================================================================##
@@ -479,7 +479,7 @@ class MoPro(nn.Module):
                     targets = concat_all_gather(target).view(-1)
                     prototype_targets = torch.index_select(prototypes, dim=0, index=targets.view(-1).type(torch.int64))
                     dists_prototypes = torch.norm(features-prototype_targets, dim=1)
-                    ## 按照MoPro的方法是仅仅保留clean样本来更新prototype
+                    ## 按照FoPro的方法是仅仅保留clean样本来更新prototype
                     clean_idx_all = concat_all_gather(clean_idx.long()) 
                     clean_idx_all = clean_idx_all.bool()
                     # update momentum prototypes with pseudo-labels
