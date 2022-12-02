@@ -1,4 +1,3 @@
-## python library
 import builtins
 import math
 import os
