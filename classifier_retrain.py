@@ -294,7 +294,7 @@ def main_worker(gpu, ngpus_per_node, args):
             if args.webvision:
                 save_checkpoint({
                     'epoch': epoch + 1,
-                    'state_dict': classifier.state_dict(),
+                    'state_dict': {**encoder.state_dict(), **classifier.state_dict()},
                     'optimizer' : optimizer.state_dict(),
                     'best_acc_web': acc_max_web,
                     'best_acc_imgnet': acc_max_imgnet
@@ -302,7 +302,7 @@ def main_worker(gpu, ngpus_per_node, args):
             else:
                 save_checkpoint({
                     'epoch': epoch + 1,
-                    'state_dict': classifier.state_dict(),
+                    'state_dict': {**encoder.state_dict(), **classifier.state_dict()},
                     'optimizer' : optimizer.state_dict(),
                     'best_acc': acc_max
                 }, is_best=False, filename='{}/checkpoint_latest.tar'.format(args.exp_dir))
@@ -317,7 +317,7 @@ def main_worker(gpu, ngpus_per_node, args):
                         and args.rank % ngpus_per_node == 0):
                     save_checkpoint({
                         'epoch': epoch + 1,
-                        'state_dict': classifier.state_dict(),
+                        'state_dict': {**encoder.state_dict(), **classifier.state_dict()},
                         'optimizer': optimizer.state_dict(),
                         'best_acc_web': [acc1_web, acc5_web],
                         'best_acc_imgnet': [acc1_imgnet, acc5_imgnet]
@@ -328,7 +328,7 @@ def main_worker(gpu, ngpus_per_node, args):
                         and args.rank % ngpus_per_node == 0):
                     save_checkpoint({
                         'epoch': epoch + 1,
-                        'state_dict': classifier.state_dict(),
+                        'state_dict': {**encoder.state_dict(), **classifier.state_dict()},
                         'optimizer': optimizer.state_dict(),
                         'best_acc_web': [acc1_web, acc5_web],
                         'best_acc_imgnet': [acc1_imgnet, acc5_imgnet]
@@ -342,7 +342,7 @@ def main_worker(gpu, ngpus_per_node, args):
                         and args.rank % ngpus_per_node == 0):
                     save_checkpoint({
                         'epoch': epoch + 1,
-                        'state_dict': classifier.state_dict(),
+                        'state_dict': {**encoder.state_dict(), **classifier.state_dict()},
                         'optimizer': optimizer.state_dict(),
                         'best_acc': [acc1, acc5]
                     }, is_best=False, filename='{}/checkpoint_best.tar'.format(args.exp_dir))

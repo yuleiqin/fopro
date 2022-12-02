@@ -36,7 +36,8 @@ if [ ! -d ${SAVE_DIR_EVAL} ]; then
     mkdir -p ${SAVE_DIR_EVAL}
 fi
 
-export MODEL_DIR=${SAVE_DIR}/stage3/checkpoint_best.tar
+# export MODEL_DIR=${SAVE_DIR}/stage3/checkpoint_best.tar
+export MODEL_DIR=ckpt/web-car/web_car_f1.tar
 
 python3 -W ignore -u eval.py --seed 0 --use_fewshot \
 --root_dir ${root_dir} \

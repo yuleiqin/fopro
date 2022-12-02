@@ -151,7 +151,6 @@ def main_worker(gpu, ngpus_per_node, args):
     epoch = checkpoint['epoch']
     print("=> loaded checkpoint '{}' (epoch {})"
             .format(resume_path, epoch))
-
     cudnn.benchmark = True
     # Data loading code
     assert(os.path.exists(args.root_dir)), "please make sure the path to web data is valid {}".format(args.root_dir)

@@ -41,9 +41,10 @@ if [ ! -d ${SAVE_DIR_EVAL} ]; then
     mkdir -p ${SAVE_DIR_EVAL}
 fi
 
-export MODEL_DIR=${SAVE_DIR}/stage3/checkpoint_best.tar
+# export MODEL_DIR=${SAVE_DIR}/stage3/checkpoint_best.tar
+export MODEL_DIR=ckpt/google500/g500_f1.tar
 
-python3 -W ignore -u eval_imgnet.py --seed 0 --webvision --fast_eval 1 \
+python3 -W ignore -u eval.py --seed 0 --webvision --fast_eval 1 \
 --root_dir ${root_dir} --pathlist_web ${pathlist} \
 --root_dir_test_web ${root_dir_test_web} --pathlist_test_web ${pathlist_test_web} \
 --root_dir_test_target ${root_dir_test_target} --pathlist_test_target ${pathlist_test_target} \
