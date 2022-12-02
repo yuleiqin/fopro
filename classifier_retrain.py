@@ -21,9 +21,6 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torch.nn.functional as F
 from utils.lr_scheduler_webFG import lr_scheduler as lr_scheduler_webFG
-# from resnet import *
-# import DataLoader.dataloader_balance as dataloader
-# import DataLoader.dataloader as dataloader
 from model import init_weights
 from backbone.basenet import AlexNet_Encoder, VGG_Encoder, BCNN_encoder
 from backbone.resnet import resnet50
