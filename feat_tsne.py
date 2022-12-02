@@ -183,8 +183,8 @@ def run_and_plot_tsne(save_root_path, if_average=False):
             class_id2name[class_id] = class_name
     
     if if_average:
-        save_path_tsne = os.path.join(os.path.dirname(feature_npy_path), "tsne_dim_avg5.npy")
-        save_path_fig = os.path.join(os.path.dirname(feature_npy_path), "tsne_train_avg5.png")
+        save_path_tsne = os.path.join(os.path.dirname(feature_npy_path), "tsne_dim_avg.npy")
+        save_path_fig = os.path.join(os.path.dirname(feature_npy_path), "tsne_train_avg.png")
     else:
         save_path_tsne = os.path.join(os.path.dirname(feature_npy_path), "tsne_dim.npy")
         save_path_fig = os.path.join(os.path.dirname(feature_npy_path), "tsne_train.png")
@@ -203,66 +203,38 @@ def run_and_plot_tsne(save_root_path, if_average=False):
     ## 200类过多 只取前20类做渲染
     is_valid = (all_label < 10)
     print(np.sum(is_valid))
-    ####8@waffle_iron
-    ####12@dam_dike_dyke
-    ####18@pole_rod
-    ####3@tricycle_trike
-    ####13@langur_monkey
-    ####9@dining_table
     all_domain = all_domain[is_valid]
     all_feat = all_feat[is_valid]
     all_label = all_label[is_valid]
+    ## 是否将fewshot样本点进行平均化处理来得到简化的可视化结果
+    if if_average:
+        ### Masking all domain of target
+        print("start averaging")
+        mask = (all_domain == 1)
+        fewshots = all_feat[mask]
+        fewshots_label = all_label[mask]
+        all_domain = all_domain[~mask]
+        all_feat = all_feat[~mask]
+        all_label = all_label[~mask]
+        fewshots_avg = []
+        fewshots_label_avg = []
+        fewshots_domains_avg = []
+        for label_i in range(int(np.amax(fewshots_label))+1):
+            mask_label_i = (fewshots_label == label_i)
+            if len(mask_label_i) > 0:
+                coord_avg = fewshots[mask_label_i]
+                fewshots_avg.append(np.mean(coord_avg, axis=0))
+                fewshots_label_avg.append(label_i)
+                fewshots_domains_avg.append(1)
+        fewshots_avg = np.array(fewshots_avg)
+        fewshots_label_avg = np.array(fewshots_label_avg)
+        fewshots_domains_avg = np.array(fewshots_domains_avg)
+        all_domain = np.concatenate((all_domain, fewshots_domains_avg), axis=0)
+        all_feat = np.concatenate((all_feat, fewshots_avg), axis=0)
+        all_label = np.concatenate((all_label, fewshots_label_avg), axis=0)
 
-    # if if_average:
-    #     ### Masking all domain of target
-    #     print("start averaging")
-    #     mask = (all_domain == 1)
-    #     fewshots = all_feat[mask]
-    #     fewshots_label = all_label[mask]
-    #     all_domain = all_domain[~mask]
-    #     all_feat = all_feat[~mask]
-    #     all_label = all_label[~mask]
-    #     fewshots_avg = []
-    #     fewshots_label_avg = []
-    #     fewshots_domains_avg = []
-    #     for label_i in range(int(np.amax(fewshots_label))+1):
-    #         mask_label_i = (fewshots_label == label_i)
-    #         if len(mask_label_i) > 0:
-    #             coord_avg = fewshots[mask_label_i]
-    #             fewshots_avg.append(np.mean(coord_avg, axis=0))
-    #             fewshots_label_avg.append(label_i)
-    #             fewshots_domains_avg.append(1)
-    #     fewshots_avg = np.array(fewshots_avg)
-    #     fewshots_label_avg = np.array(fewshots_label_avg)
-    #     fewshots_domains_avg = np.array(fewshots_domains_avg)
-    #     all_domain = np.concatenate((all_domain, fewshots_domains_avg), axis=0)
-    #     all_feat = np.concatenate((all_feat, fewshots_avg), axis=0)
-    #     all_label = np.concatenate((all_label, fewshots_label_avg), axis=0)
-
-    # if not os.path.exists(save_path_tsne):
     tsne = dim_reduction_tsne(all_feat, save_path_tsne)
-    # else:
-    #     tsne = np.load(save_path_tsne)
-    ##title="t-SNE of web images(o), few-shots(^), and prototypes(x)"
-
-    # is_valid = (all_label == 8) | (all_label == 12) | (all_label == 18) | (all_label == 3) | (all_label == 13) | (all_label == 9)
-    # all_domain = all_domain[is_valid]
-    # all_feat = all_feat[is_valid]
-    # all_label = all_label[is_valid]
-    # all_label[all_label==8] = 0
-    # all_label[all_label==12] = 1
-    # all_label[all_label==18] = 2
-    # all_label[all_label==3] = 3
-    # all_label[all_label==13] = 4
-    # all_label[all_label==9] = 5
-    # class_id2name = {}
-    # class_id2name[0] = "waffle_iron"
-    # class_id2name[1] = "dam_dike_dyke"
-    # class_id2name[2] = "pole_rod"
-    # class_id2name[3] = "tricycle_trike"
-    # class_id2name[4] = "langur_monkey"
-    # class_id2name[5] = "dining_table"
-
+    #title="t-SNE of web images(o), few-shots(^), and prototypes(x)"
     plot(tsne, all_label, all_domain,\
         save_path_fig=save_path_fig,\
             class_id2name=class_id2name,\

@@ -52,14 +52,14 @@ def sample_K_shots(few_shot_path, ref_path, K=1):
 
 
 
-few_shot_path = "/youtu-reid/yuleiqin/code_utils/noise_web_learn/SCC_baseline/imglists/imgnet_webvision1k/fewshot_16_shot.txt"
-# ref_path = "/youtu-reid/yuleiqin/code_utils/noise_web_learn/SCC_baseline/imglists/imgnet_webvision1k/fewshot_4_shot.txt"
+# few_shot_path = "./SCC_baseline/imglists/imgnet_webvision1k/fewshot_16_shot.txt"
+# ref_path = "./SCC_baseline/imglists/imgnet_webvision1k/fewshot_4_shot.txt"
 # K = 4
-# ref_path = "/youtu-reid/yuleiqin/code_utils/noise_web_learn/SCC_baseline/imglists/imgnet_webvision1k/fewshot_2_shot.txt"
+# ref_path = "./SCC_baseline/imglists/imgnet_webvision1k/fewshot_2_shot.txt"
 # K = 2
-# ref_path = "/youtu-reid/yuleiqin/code_utils/noise_web_learn/SCC_baseline/imglists/imgnet_webvision1k/fewshot_8_shot.txt"
+# ref_path = "./SCC_baseline/imglists/imgnet_webvision1k/fewshot_8_shot.txt"
 # K = 8
-ref_path = "/youtu-reid/yuleiqin/code_utils/noise_web_learn/SCC_baseline/imglists/imgnet_webvision1k/fewshot_1_shot.txt"
-K = 1
-sample_K_shots(few_shot_path, ref_path, K)
+# ref_path = "./SCC_baseline/imglists/imgnet_webvision1k/fewshot_1_shot.txt"
+# K = 1
+# sample_K_shots(few_shot_path, ref_path, K)
 

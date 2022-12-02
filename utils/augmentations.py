@@ -526,7 +526,7 @@ class RandomStripesOverlay(ImageOnlyTransform):
 if __name__ == "__main__":
     save_dir_path = "augmentation_test"
     os.makedirs(save_dir_path, exist_ok=True)
-    img_path = "/youtu_pedestrian_detection/yuleiqin/datasets/finegrained/WebFG496/web-bird/train/001.Black_footed_Albatross/001.Black_footed_Albatross_00001.jpg"
+    img_path = "./dataset/WebFG496/web-bird/train/001.Black_footed_Albatross/001.Black_footed_Albatross_00001.jpg"
     trans = [
         RandomBorder(),
         RandomTranslate(),
