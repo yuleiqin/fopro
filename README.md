@@ -87,7 +87,7 @@ For example,
 * use the script ```./eval_shells/webvision1k.sh``` for the evaluation of ResNet50 models on ImageNet1k.
 
 ## Model Weights
-
+We provide the model weights in the ```./ckpt``` folder. Please check the evaluation shells for inference.
 
 # Post-Processing
 Enlightened by MoPro <https://openreview.net/forum?id=0-EYBhgw80y>, noise cleaning on the WebVision1k dataset can be performed to further reduce the noise and improve performance by fine-tuning.
@@ -103,6 +103,9 @@ Other hyper-parameters are yet to be fine-tuned. Their current value is empirica
 
 It remains to be explored which value of the distance threshold ```dist_th``` works best on picking out clean examples. One could design a threshold whose value varies with respect to epoch or loss.
 
+# Results
+The comparison with state-of-the-art methods on WebFG496 and WebVision1k/Google500 datasets demonstrates the effectiveness of FoPro in utilization of real-world fewshots.
+![results](./imgs/img2.jpg "Results of comparison with SOTA.")
 
 # Acknowledgement
 We would like to thank authors of SCC <https://arxiv.org/abs/2008.11894> for their instruction on reproduction of SCC results on WebVision1k/Google500.
